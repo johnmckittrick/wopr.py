@@ -60,7 +60,7 @@ class TicTacToe:
 			else:
 				moves[self.getrandomnumber(moves.index("X"))] = "O"
 				self.movesmade += 1
-		elif (self.movesmade == 3):
+		elif (self.movesmade in (3, 5)):
 			if ((moves[4] == moves[8] == "X") and (moves[0] == " ")):
 				moves[0] = "O"
 				self.movesmade += 1
