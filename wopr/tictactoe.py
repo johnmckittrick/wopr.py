@@ -26,7 +26,7 @@ class TicTacToe:
 		print(board)
 
 	def getplayers(self):
-		players = input("No. of players: ")
+		self.players = input("NO. OF PLAYERS> ")		
 
 	def makehumanmove(self, playerno, squareno, moves):
 		pos = squareno - 1
@@ -35,7 +35,7 @@ class TicTacToe:
 			if (playerno == 1):
 				moves[pos] = "X"
 			else:
-				moves[pos] = "O"			
+				moves[pos] = "O"
 
 	def getrandomnumber(self, initpos):
 		newpos = initpos
@@ -134,21 +134,32 @@ if __name__ == "__main__":
 		TicTacToe.printboard(moves)
 		TicTacToe.getplayers()
 	
-		while not winner:
-			squarepos = input("Select square: ")
-			TicTacToe.makehumanmove(1, int(squarepos), moves)
-			if (TicTacToe.checkforwinner(moves) == 1):
-				TicTacToe.printboard(moves)
-				winner = 1
-				pass
-			else:
-				TicTacToe.makecomputermove(moves)
-				TicTacToe.printboard(moves)
+		if (TicTacToe.players == "0"):
+			print("I CANNOT LEARN YET.")
+			print("--CONNECTION TERMINATED--")
+			playagain = "n"
+		elif (TicTacToe.players == "1"):
+			while not winner:
+				squarepos = input("SELECT SQUARE> ")
+				TicTacToe.makehumanmove(1, int(squarepos), moves)
 				if (TicTacToe.checkforwinner(moves) == 1):
+					TicTacToe.printboard(moves)
 					winner = 1
 					pass
 				else:
+					TicTacToe.makecomputermove(moves)
 					TicTacToe.printboard(moves)
-		
-		playagain = input("Would you like to play again (Y/N): ")		
-		
+					if (TicTacToe.checkforwinner(moves) == 1):
+						winner = 1
+						pass
+					else:
+						TicTacToe.printboard(moves)
+			
+			playagain = input("WOULD YOU LIKE TO PLAY AGAIN (Y/N)> ")
+		elif (TicTacToe.players == "2"):
+			print("TWO PLAYERS WILL ARRIVE SOON.")
+			playagain = "n"
+		else:
+			print("TIC TAC TOE IS A TWO PLAYER GAME.")
+			print("--CONNECTION TERMINATED--")
+			playagain = "n"		
